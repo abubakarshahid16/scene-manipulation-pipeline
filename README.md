@@ -1,123 +1,83 @@
-# Scene Manipulation via Text-Controlled Object Relighting and Relocation
+# Scene Manipulation Pipeline
 
-This project implements a comprehensive pipeline for scene manipulation using natural language instructions. The system can perform object-level modifications such as relocation and relighting by leveraging segmentation models and diffusion-based inpainting.
+A research-style computer-vision pipeline for scene manipulation using text instructions. The system targets object-level relocation and relighting by combining instruction parsing, segmentation, inpainting, and output composition.
 
-## 🎯 Project Overview
+## Overview
 
-The pipeline consists of five main components:
+This project explores how natural-language instructions can be converted into visual scene edits such as:
 
-1. **Text Instruction Parsing** - Converts natural language instructions into structured actions
-2. **Object Identification and Segmentation** - Uses SAM/DETR to localize and segment target objects
-3. **Object Relocation** - Removes and re-inserts objects in new locations
-4. **Relighting** - Applies lighting transformations using diffusion models
-5. **Output Generation** - Provides comprehensive visual results
+- moving an object to a new location
+- changing the scene lighting or object lighting
+- generating composite outputs that reflect the requested manipulation
 
-## 🏗️ Project Structure
+It is positioned as a pipeline-style CV project rather than a production application.
 
-```
-├── src/
-│   ├── text_parser/          # Natural language instruction parsing
-│   ├── segmentation/         # Object detection and segmentation
-│   ├── relocation/           # Object relocation logic
-│   ├── relighting/           # Lighting transformation
-│   ├── diffusion/            # Diffusion model utilities
-│   └── utils/                # Helper functions
-├── models/                   # Pre-trained model downloads
-├── data/                     # Dataset and sample images
-├── outputs/                  # Generated results
-├── notebooks/                # Jupyter notebooks for experimentation
-└── tests/                    # Unit tests
-```
+## Pipeline Components
 
-## 🚀 Quick Start
+1. text instruction parsing
+2. object identification and segmentation
+3. object relocation
+4. relighting transformation
+5. final image composition and evaluation
 
-### Installation
+## Example Outputs
 
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd scene-manipulation-pipeline
-```
+| Original | Comparison |
+| --- | --- |
+| ![Original scene](original.png) | ![Comparison output](comparison.png) |
 
-2. Install dependencies:
+| Relocation | Lighting Change |
+| --- | --- |
+| ![Car moved](car_moved.png) | ![Warm lighting](warm_lighting.png) |
+
+## Repository Contents
+
+- `pipeline.py`: main orchestration logic
+- `instruction_parser.py`: natural-language instruction parsing
+- `object_detector.py`, `segment_anything.py`, `mask_processor.py`: localization and segmentation logic
+- `object_relocator.py`, `compositor.py`, `inpainting_model.py`: object edit and composition components
+- `evaluation.py`: evaluation utilities
+- `demo.py`, `simple_demo.py`, `example_usage.py`: runnable examples
+- output images such as `comparison.png`, `car_moved.png`, and lighting variants
+
+## Technical Themes
+
+- text-guided image editing
+- segmentation and object extraction
+- inpainting-based scene repair
+- relighting / illumination changes
+- research-pipeline experimentation with modern CV models
+
+## Why This Project Matters
+
+This repository is a strong portfolio piece because it demonstrates:
+
+- multimodal reasoning
+- computer vision pipeline design
+- research-oriented experimentation
+- image editing through modular components
+- visible before/after outputs
+
+## Running the Project
+
+Typical setup:
+
 ```bash
 pip install -r requirements.txt
+python demo.py
 ```
 
-3. Download required models:
+If required by the environment, download model assets first:
+
 ```bash
-python scripts/download_models.py
+python download_models.py
 ```
 
-### Basic Usage
+## Current Repository Status
 
-```python
-from src.pipeline import SceneManipulationPipeline
+This project is best presented as a portfolio and experimentation repo. Its strength comes from the modular pipeline structure and example outputs rather than polished productization.
 
-# Initialize the pipeline
-pipeline = SceneManipulationPipeline()
+## Author
 
-# Process an image with text instruction
-result = pipeline.process(
-    image_path="path/to/image.jpg",
-    instruction="Move the car to the left and add sunset lighting"
-)
-
-# Save results
-result.save_outputs("outputs/")
-```
-
-## 📋 Features
-
-- **Natural Language Understanding**: Parse complex instructions like "Move the red car to the left and add golden hour lighting"
-- **State-of-the-art Segmentation**: Uses SAM and DETR for precise object detection
-- **Advanced Relighting**: Neural relighting with diffusion models
-- **Seamless Object Relocation**: Maintains visual consistency during object movement
-- **Comprehensive Outputs**: Side-by-side comparisons with intermediate results
-
-## 🎨 Example Instructions
-
-- "Move the car to the left side of the road"
-- "Add sunset lighting to the entire scene"
-- "Relocate the person to the center and add dramatic shadows"
-- "Move the tree to the background and apply golden hour lighting"
-
-## 📊 Evaluation Metrics
-
-- CLIP similarity scores between instruction and output
-- Object detection accuracy
-- Lighting consistency metrics
-- Visual quality assessment
-
-## 🔬 Technical Details
-
-### Models Used
-- **SAM (Segment Anything Model)**: For precise object segmentation
-- **DETR (Detection Transformer)**: For object detection
-- **Stable Diffusion**: For inpainting and generation
-- **CLIP**: For text-image similarity scoring
-
-### Key Algorithms
-- Diffusion-based inpainting for object removal
-- Neural relighting with learned lighting adjustments
-- Prompt-conditioned generation for object re-insertion
-- Multi-scale consistency checking
-
-## 📚 References
-
-- [Segment Anything Model](https://github.com/facebookresearch/segment-anything)
-- [Stable Diffusion](https://github.com/CompVis/stable-diffusion)
-- [Neural Gaffer: Relighting Any Object via Diffusion](https://arxiv.org/abs/2303.12503)
-- [Paint by Inpaint: Learning to Add Image Objects by Removing Them](https://arxiv.org/abs/2303.17693)
-
-## 🤝 Contributing
-
-This is an open-ended research project. Contributions are welcome! Please feel free to:
-- Propose alternative approaches
-- Add new features
-- Improve documentation
-- Submit bug reports
-
-## 📄 License
-
-This project is for educational and research purposes. 
+Abubakar Shahid  
+GitHub: <https://github.com/abubakarshahid16>
