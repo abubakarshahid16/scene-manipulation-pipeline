@@ -35,11 +35,11 @@ The workflow is organized as:
 
 | Original | Comparison |
 | --- | --- |
-| ![Original scene](original.png) | ![Comparison output](comparison.png) |
+| ![Original scene](docs/examples/original.png) | ![Comparison output](docs/examples/comparison.png) |
 
 | Relocation | Lighting Change |
 | --- | --- |
-| ![Car moved](car_moved.png) | ![Warm lighting](warm_lighting.png) |
+| ![Car moved](docs/examples/car_moved.png) | ![Warm lighting](docs/examples/warm_lighting.png) |
 
 ## Repository contents
 
@@ -49,7 +49,7 @@ The workflow is organized as:
 - `object_relocator.py`, `compositor.py`, `inpainting_model.py`: edit and composition components
 - `evaluation.py`: evaluation utilities
 - `demo.py`, `simple_demo.py`, `example_usage.py`: runnable examples
-- output images such as `comparison.png`, `car_moved.png`, and lighting variants
+- `docs/examples/`: output images and project-summary artifacts
 
 ## Why this project matters
 
@@ -82,3 +82,7 @@ A production-grade scene-editing system would usually add:
 - evaluation datasets and user quality metrics
 
 This makes the repository best positioned as a **research and prototyping pipeline for text-guided scene editing**.
+
+## Current structure improvement
+
+Example outputs and the project summary have been grouped under `docs/examples/` so the repository root stays focused on the actual pipeline modules.
