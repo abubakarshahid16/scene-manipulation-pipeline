@@ -1,26 +1,37 @@
 # Scene Manipulation Pipeline
 
-A research-style computer-vision pipeline for scene manipulation using text instructions. The system targets object-level relocation and relighting by combining instruction parsing, segmentation, inpainting, and output composition.
+A modular computer-vision pipeline for editing scenes from natural-language instructions.
 
-## Overview
+The system is designed around two core capabilities:
 
-This project explores how natural-language instructions can be converted into visual scene edits such as:
+- object-level relocation
+- lighting or relighting transformation
 
-- moving an object to a new location
-- changing the scene lighting or object lighting
-- generating composite outputs that reflect the requested manipulation
+It combines instruction parsing, detection, segmentation, inpainting, composition, and evaluation into a single research-style workflow.
 
-It is positioned as a pipeline-style CV project rather than a production application.
+## Problem this project solves
 
-## Pipeline Components
+Image editing systems often require direct manual masking or highly specialized tooling. A text-guided scene-editing pipeline aims to reduce that friction by allowing users to describe edits in natural language instead of performing every transformation by hand.
 
-1. text instruction parsing
+This project explores how to turn prompts such as:
+
+- move the car to the left
+- make the lighting warmer
+- create a more dramatic scene
+
+into structured visual transformations.
+
+## Pipeline overview
+
+The workflow is organized as:
+
+1. instruction parsing
 2. object identification and segmentation
-3. object relocation
-4. relighting transformation
-5. final image composition and evaluation
+3. object relocation or lighting transformation
+4. scene repair and composition
+5. output evaluation
 
-## Example Outputs
+## Example outputs
 
 | Original | Comparison |
 | --- | --- |
@@ -30,54 +41,44 @@ It is positioned as a pipeline-style CV project rather than a production applica
 | --- | --- |
 | ![Car moved](car_moved.png) | ![Warm lighting](warm_lighting.png) |
 
-## Repository Contents
+## Repository contents
 
 - `pipeline.py`: main orchestration logic
-- `instruction_parser.py`: natural-language instruction parsing
+- `instruction_parser.py`: text instruction parsing
 - `object_detector.py`, `segment_anything.py`, `mask_processor.py`: localization and segmentation logic
-- `object_relocator.py`, `compositor.py`, `inpainting_model.py`: object edit and composition components
+- `object_relocator.py`, `compositor.py`, `inpainting_model.py`: edit and composition components
 - `evaluation.py`: evaluation utilities
 - `demo.py`, `simple_demo.py`, `example_usage.py`: runnable examples
 - output images such as `comparison.png`, `car_moved.png`, and lighting variants
 
-## Technical Themes
+## Why this project matters
 
-- text-guided image editing
-- segmentation and object extraction
-- inpainting-based scene repair
-- relighting / illumination changes
-- research-pipeline experimentation with modern CV models
+- It demonstrates multimodal pipeline design.
+- It combines language understanding with visual transformation.
+- It is stronger than a single-model demo because the workflow is modular.
+- It provides visible before/after evidence of the system behavior.
 
-## Why This Project Matters
-
-This repository is a strong portfolio piece because it demonstrates:
-
-- multimodal reasoning
-- computer vision pipeline design
-- research-oriented experimentation
-- image editing through modular components
-- visible before/after outputs
-
-## Running the Project
-
-Typical setup:
+## Run locally
 
 ```bash
 pip install -r requirements.txt
 python demo.py
 ```
 
-If required by the environment, download model assets first:
+If the environment requires model assets first:
 
 ```bash
 python download_models.py
 ```
 
-## Current Repository Status
+## Industrial positioning
 
-This project is best presented as a portfolio and experimentation repo. Its strength comes from the modular pipeline structure and example outputs rather than polished productization.
+A production-grade scene-editing system would usually add:
 
-## Author
+- more robust instruction grounding
+- stronger failure handling when objects are ambiguous
+- faster inference and model packaging
+- richer support for multiple object types and edit intents
+- evaluation datasets and user quality metrics
 
-Abubakar Shahid  
-GitHub: <https://github.com/abubakarshahid16>
+This makes the repository best positioned as a **research and prototyping pipeline for text-guided scene editing**.
